@@ -3,3 +3,8 @@ export interface ISignIn {
     message: string;
     token?: string;
 }
+
+export interface ISignUp {
+    flag: boolean;
+    message: string;
+}
