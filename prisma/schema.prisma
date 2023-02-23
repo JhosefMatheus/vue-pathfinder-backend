@@ -11,8 +11,16 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  fullName String @unique
-  login    String
-  password String
+  id          Int          @id @default(autoincrement())
+  fullName    String
+  login       String       @unique
+  password    String
+  pathfinders Pathfinder[]
+}
+
+model Pathfinder {
+  id     Int    @id @default(autoincrement())
+  userId Int
+  name   String
+  user   User   @relation(fields: [userId], references: [id])
 }
