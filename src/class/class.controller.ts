@@ -1,7 +1,8 @@
-import { Controller, Get, UseGuards, Res } from "@nestjs/common";
+import { Controller, Get, UseGuards, Res, Param } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { Response } from "express";
 import { ClassService } from "./class.service";
+import { IGetClassDataParams } from "./interface/class.interface";
 
 @UseGuards(AuthGuard("jwt"))
 @Controller("class")
@@ -14,6 +15,24 @@ export class ClassController {
 
         return response.status(200).json({
             classes
+        });
+    }
+
+    @Get(":id")
+    async getClassData(@Res() response: Response, @Param() params: IGetClassDataParams): Promise<Response> {
+        const { id } = params;
+
+        const { flag, message, currentClass } = await this.classService.getClassData(id);
+
+        if (flag) {
+            return response.status(200).json({
+                message,
+                currentClass
+            });
+        }
+
+        return response.status(401).json({
+            message
         });
     }
 }

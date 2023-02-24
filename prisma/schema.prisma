@@ -26,7 +26,12 @@ model Pathfinder {
 }
 
 model Class {
-  id Int @id @default(autoincrement())
-  name String
+  id         Int    @id @default(autoincrement())
+  name       String
   classImage String
+}
+
+model RequirementGroup {
+  id   Int    @id @default(autoincrement())
+  name String
 }
