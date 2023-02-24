@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { ClassModule } from './class/class.module';
 import { PathfinderModule } from './pathfinder/pathfinder.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { TokenModule } from './token/token.module';
@@ -13,7 +14,8 @@ import { TokenModule } from './token/token.module';
     AuthModule,
     PrismaModule,
     TokenModule,
-    PathfinderModule
+    PathfinderModule,
+    ClassModule
   ]
 })
 export class AppModule {}

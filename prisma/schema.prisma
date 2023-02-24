@@ -24,3 +24,9 @@ model Pathfinder {
   name   String
   user   User   @relation(fields: [userId], references: [id])
 }
+
+model Class {
+  id Int @id @default(autoincrement())
+  name String
+  classImage String
+}
