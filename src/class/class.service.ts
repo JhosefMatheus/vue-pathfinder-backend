@@ -32,8 +32,6 @@ export class ClassService {
                 currentClass
             }
         } catch (error) {
-            console.log(error);
-
             if (error instanceof Prisma.PrismaClientKnownRequestError) {
                 if (error.code === "P2025") {
                     return {

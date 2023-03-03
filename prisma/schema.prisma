@@ -26,12 +26,39 @@ model Pathfinder {
 }
 
 model Class {
-  id         Int    @id @default(autoincrement())
-  name       String
-  classImage String
+  id           Int           @id @default(autoincrement())
+  name         String
+  classImage   String
+  requirements Requirement[]
 }
 
 model RequirementGroup {
-  id   Int    @id @default(autoincrement())
-  name String
+  id           Int           @id @default(autoincrement())
+  name         String
+  requirements Requirement[]
+}
+
+model Requirement {
+  id                 Int              @id @default(autoincrement())
+  requirementGroupId Int
+  classId            Int
+  content            String @db.Text
+  requirementGroup   RequirementGroup @relation(fields: [requirementGroupId], references: [id])
+  class              Class            @relation(fields: [classId], references: [id])
+  subrequirements    Subrequirement[]
+}
+
+model Subrequirement {
+  id                   Int                @id @default(autoincrement())
+  subrequirementTypeId Int
+  requirementId        Int
+  content              String @db.Text
+  subrequirementType   SubrequirementType @relation(fields: [subrequirementTypeId], references: [id])
+  requirement          Requirement        @relation(fields: [requirementId], references: [id])
+}
+
+model SubrequirementType {
+  id              Int              @id @default(autoincrement())
+  type            String
+  subrequirements Subrequirement[]
 }
