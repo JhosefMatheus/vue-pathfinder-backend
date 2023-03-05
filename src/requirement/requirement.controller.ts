@@ -12,9 +12,7 @@ export class RequirementController {
     @Get("requirements/:classId/:requirementGroupId")
     async getRequirements(@Res() response: Response, @Param() params: IGetRequirementsParams) {
         const { classId, requirementGroupId } = params;
-
-        console.log(classId, requirementGroupId);
-
+        
         const { flag, message, requirements } = await this.requirementService.getRequirements(classId, requirementGroupId);
 
         if (flag) {

@@ -6,6 +6,7 @@ import { PathfinderModule } from './pathfinder/pathfinder.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { RequirementModule } from './requirement/requirement.module';
 import { RequirementGroupModule } from './requirementGroup/requirementGroup.module';
+import { RequirementPathfinderModule } from './requirementPathfinder/requirementPathfinder.module';
 import { SubRequirementModule } from './subRequirement/subRequirement.module';
 import { TokenModule } from './token/token.module';
 
@@ -21,7 +22,8 @@ import { TokenModule } from './token/token.module';
     ClassModule,
     RequirementGroupModule,
     RequirementModule,
-    SubRequirementModule
+    SubRequirementModule,
+    RequirementPathfinderModule
   ]
 })
 export class AppModule {}
