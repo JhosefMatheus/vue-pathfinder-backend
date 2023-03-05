@@ -2,7 +2,7 @@ import { Controller, Get, UseGuards, Res, Param } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { Response } from "express";
 import { ClassService } from "./class.service";
-import { IGetClassDataParams } from "./interface/class.interface";
+import { IGetClassDataParams, IGetClassPathfinderProgressParams } from "./interface";
 
 @UseGuards(AuthGuard("jwt"))
 @Controller("class")
@@ -15,6 +15,17 @@ export class ClassController {
 
         return response.status(200).json({
             classes
+        });
+    }
+
+    @Get("progress/:pathfinderId/:classId")
+    async getClassPathfinderProgress(@Res() response: Response, @Param() params: IGetClassPathfinderProgressParams): Promise<Response> {
+        const { pathfinderId, classId } = params;
+
+        const pathfinderProgress = await this.classService.getClassPathfinderProgress(pathfinderId, classId);
+
+        return response.status(200).json({
+            pathfinderProgress
         });
     }
 

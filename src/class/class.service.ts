@@ -2,7 +2,7 @@ import { Class, Prisma } from "@prisma/client";
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { IGetClasses } from "./dto";
-import { IGetClassData } from "./interface/class.interface";
+import { IGetClassData } from "./interface";
 
 @Injectable()
 export class ClassService {
@@ -41,5 +41,34 @@ export class ClassService {
                 }
             }
         }
+    }
+
+    async getClassPathfinderProgress(pathfinderId: string, classId: string): Promise<number> {
+        const numberClassRequirements: number = (await this.prismaService.requirement.findMany({
+            where: {
+                classId: {
+                    equals: parseInt(classId)
+                }
+            }
+        })).length;
+
+        const pathfinderRequirementConcluded: number = (await this.prismaService.requirementPathfinder.findMany({
+            where: {
+                AND: {
+                    requirement: {
+                        classId: {
+                            equals: parseInt(classId)
+                        }
+                    },
+                    pathfinderId: {
+                        equals: parseInt(pathfinderId)
+                    }
+                }
+            }
+        })).length;
+
+        const pathfinderProgress: number = Math.round((pathfinderRequirementConcluded / numberClassRequirements)*100);
+
+        return pathfinderProgress;
     }
 }

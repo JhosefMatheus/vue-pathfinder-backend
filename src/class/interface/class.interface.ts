@@ -9,3 +9,8 @@ export interface IGetClassData {
     message: string;
     currentClass?: Class;
 }
+
+export interface IGetClassPathfinderProgressParams {
+    pathfinderId: string;
+    classId: string;
+}
